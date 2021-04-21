@@ -11,17 +11,13 @@ import com.crystal.webapplication.models.News;
 @Mapper
 public class NewsMapper {
 
-	
-	
-	
 	public NewsDto modelMapper(News news) {
 		NewsDto newsDto = new NewsDto();
 		newsDto.setTitle(news.getTitle());
 		newsDto.setDescription(news.getDescription());
-		
+
 		return newsDto;
-	
+
 	}
-	
-	
+
 }

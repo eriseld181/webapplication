@@ -1,10 +1,19 @@
 package com.crystal.webapplication.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity(name = "news")
+//pse e duam kete?
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class News {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +24,19 @@ public class News {
 	private String creation_date;
 	private String author;
 	
+	@OneToMany
+	@JoinTable(name = "comments", 
+	joinColumns =@JoinColumn(name = "id"),
+	inverseJoinColumns = @JoinColumn(name="news_id"))
+	
+	private List<Comment> comments;
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	public String getTitle() {
 		return title;
 	}
