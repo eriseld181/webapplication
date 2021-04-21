@@ -29,7 +29,7 @@ public class News {
 	
 	
 	private List<Comment> comments;
-	 @JsonIgnore
+	 //@JsonIgnore
 	public List<Comment> getComments() {
 		return comments;
 	}
