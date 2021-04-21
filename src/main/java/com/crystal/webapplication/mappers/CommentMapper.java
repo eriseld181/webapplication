@@ -1,11 +1,6 @@
 package com.crystal.webapplication.mappers;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.mapstruct.factory.Mappers;
-import org.springframework.web.bind.annotation.Mapping;
-
-import com.crystal.webapplication.dto.CommentDto;
-import com.crystal.webapplication.models.Comment;
+import org.mapstruct.Mapper;
 
 @Mapper
 public class CommentMapper {
