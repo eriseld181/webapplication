@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crystal.webapplication.models.News;
 import com.crystal.webapplication.repositories.NewsRepository;
 import com.crystal.webapplication.services.NewsServices;
 @RestController
