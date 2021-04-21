@@ -1,4 +1,4 @@
-package com.crystal.webapplication.models;
+package com.crystal.webapplication.controllers;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class NewsController {
 	@Autowired
 	private NewsServices newsService;
 	@GetMapping
-	public List<NewsModel> myMethod() {
+	public List<News> myMethod() {
 		return newsService.list();
 	}
 	
