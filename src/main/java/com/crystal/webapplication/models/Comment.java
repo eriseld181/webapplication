@@ -31,10 +31,10 @@ public class Comment {
 	//private DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 	
 	//@OneToMany(mappedBy="news")
-//	@ManyToOne
-//	@JoinColumn(name="news_id")
+	@ManyToOne
+	@JoinColumn(name="news_id")
 	
-	//private News news;
+	private News news;
 	
 	public Comment() {
 		
@@ -87,11 +87,11 @@ public class Comment {
 		this.approved_date = approved_date;
 	}
 
-//	public News getNews() {
-//		return news;
-//	}
-//	public void setNews(News news) {
-//		this.news = news;
-//	}
+	public News getNews() {
+		return news;
+	}
+	public void setNews(News news) {
+		this.news = news;
+	}
 	
 }
