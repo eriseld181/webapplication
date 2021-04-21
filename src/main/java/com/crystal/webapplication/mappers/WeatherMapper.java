@@ -13,7 +13,11 @@ public class WeatherMapper {
             weatherDto.setT_mid(weather.getTemp_midday());
             weatherDto.setT_after(weather.getTemp_afternon());
             weatherDto.setT_morn(weather.getTemp_morning());
-
+            weatherDto.setAvg(avg(weather));
+            weatherDto.setDate(weather.getIdweather());
+            weatherDto.setMax(max(weather));
+            weatherDto.setMin(min(weather));
+            return weatherDto;
         }
         private double max(Weather weather){
             double max = weather.getTemp_morning();
