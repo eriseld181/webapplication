@@ -1,8 +1,9 @@
-package com.crystal.webapplication.dto;
+package com.crystal.webapplication.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 
+import com.crystal.webapplication.dto.NewsDto;
 import com.crystal.webapplication.models.NewsModel;
 
 public class NewsModelMapper {

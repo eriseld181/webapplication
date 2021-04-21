@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crystal.webapplication.dto.NewsDto;
-import com.crystal.webapplication.dto.NewsModelMapper;
+import com.crystal.webapplication.mappers.NewsModelMapper;
 import com.crystal.webapplication.models.NewsController;
 import com.crystal.webapplication.models.NewsModel;
 import com.crystal.webapplication.repositories.NewsRepository;
