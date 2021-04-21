@@ -4,7 +4,6 @@ package com.crystal.webapplication.dto;
 
 public class NewsDto {
 	
-	private Long Id;
 	
 	private String title;
 	private String description;
@@ -20,12 +19,7 @@ public class NewsDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Long getId() {
-		return Id;
-	}
-	public void setId(Long id) {
-		Id = id;
-	}
+	
 	
 	
 }
