@@ -10,19 +10,17 @@ public class Weather {
       private String idweather;
       private String weather_day_name;
       private String weather_description;
-      private String temp_morning;
-      private String temp_midday;
-      private String temp_afternon;
+      private double temp_morning;
+      private double temp_midday;
+      private double temp_afternon;
 
-    public String getIdWeather() {
+      public Weather(){}
+
+    public String getIdweather() {
         return idweather;
     }
 
-    public void setIdWeather(String idweather) {
-        /*Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
-        String dateOnly = dateFormat.format(currentDate);
-        //System.out.println(dateOnly);*/
+    public void setIdweather(String idweather) {
         this.idweather = idweather;
     }
 
@@ -42,27 +40,27 @@ public class Weather {
         this.weather_description = weather_description;
     }
 
-    public String getTemp_morning() {
+    public double getTemp_morning() {
         return temp_morning;
     }
 
-    public void setTemp_morning(String temp_morning) {
+    public void setTemp_morning(double temp_morning) {
         this.temp_morning = temp_morning;
     }
 
-    public String getTemp_midday() {
+    public double getTemp_midday() {
         return temp_midday;
     }
 
-    public void setTemp_midday(String temp_midday) {
+    public void setTemp_midday(double temp_midday) {
         this.temp_midday = temp_midday;
     }
 
-    public String getTemp_afternon() {
+    public double getTemp_afternon() {
         return temp_afternon;
     }
 
-    public void setTemp_afternon(String temp_afternon) {
+    public void setTemp_afternon(double temp_afternon) {
         this.temp_afternon = temp_afternon;
     }
 }

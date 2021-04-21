@@ -1,7 +1,7 @@
 package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.models.Weather;
-import com.crystal.webapplication.repositories.weatherRepository;
+import com.crystal.webapplication.repositories.WeatherRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
