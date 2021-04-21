@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crystal.webapplication.models.News;
-<<<<<<< HEAD
 
-=======
-import com.crystal.webapplication.repositories.NewsRepository;
->>>>>>> 3fbf4ace84dfa390c2159429490d383444f8f15e
 import com.crystal.webapplication.services.NewsServices;
 
 //ben rest api
