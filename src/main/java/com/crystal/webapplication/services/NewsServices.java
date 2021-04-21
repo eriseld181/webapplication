@@ -16,10 +16,10 @@ import com.crystal.webapplication.models.News;
 import com.crystal.webapplication.repositories.NewsRepository;
 
 
-
+//tregon qe eshte per services
 @Service
-
 public class NewsServices {
+	//krijon objektin
 	@Autowired
 	private NewsRepository newsRepository;
 	
