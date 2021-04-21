@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.crystal.webapplication.repositories.NewsRepository;
 
 public class NewsController {
+	String a = "":hello";
 	@Autowired
 	private NewsRepository newsrepository;
 	
