@@ -41,4 +41,10 @@ public class  WeatherServices {
         }
         return weatherDtos;
     }
+    public void deleteByDate(LocalDate localDate){
+        weatherRepository.deleteById(localDate);
+    }
+//    public void insert(Weather weather){
+//
+//    }
 }

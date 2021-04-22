@@ -1,12 +1,14 @@
 package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.dto.WeatherDto;
+import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.services.WeatherServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.crystal.webapplication.mappers.WeatherMapper;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,4 +29,13 @@ public class weatherController {
     public List<WeatherDto> WeatherDtos(@PathVariable int numberofdays){
         return weatherServices.getWeatherDetailsforxdays(numberofdays);
     }
+    @RequestMapping(value = "{idweather}",method = RequestMethod.DELETE)
+    public void delete(@PathVariable String idweather){
+        LocalDate localDate = LocalDate.parse(idweather);
+        weatherServices.deleteByDate(localDate);
+    }
+//    @PostMapping("/insert")
+//    public Weather create(@RequestBody final Weather weather){
+//        return weatherRepository.saveAndFlush(weather);
+//    }
 }
