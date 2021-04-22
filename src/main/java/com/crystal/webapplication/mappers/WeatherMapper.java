@@ -20,7 +20,7 @@ public class WeatherMapper {
             weatherDto.setMin(min(weather));
             return weatherDto;
         }
-        public WeatherDto converttoDto2(Weather weather){
+        public static WeatherDto converttoDto2(Weather weather){
             WeatherDto weatherDto = new WeatherDto();
             weatherDto.setDate(weather.getIdweather());
             weatherDto.setMin(min(weather));
