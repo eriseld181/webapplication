@@ -1,9 +1,11 @@
 package com.crystal.webapplication.controllers;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import com.crystal.webapplication.models.News;
+import com.crystal.webapplication.repositories.NewsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crystal.webapplication.dto.NewsDto;
@@ -29,10 +32,17 @@ public class NewsController {
 	@Autowired
 	private NewsServices newsService;
 	//private NewsDto newsDto;
+	@Autowired
+	private NewsRepository newsRepository;
+	//private NewsDto newsDto;
 	
 	@GetMapping
 	public List<News> myMethod() {
 		return newsService.list();
+	}
+	@RequestMapping("/search")
+	public List<News> findAll(@RequestParam Optional<String> title){
+		return newsRepository.findByTitle(title.orElse("_"));
 	}
 	
 

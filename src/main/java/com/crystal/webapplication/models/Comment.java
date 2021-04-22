@@ -1,8 +1,6 @@
 package com.crystal.webapplication.models;
 
 import java.util.Date;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name= "comments")
@@ -28,12 +24,10 @@ public class Comment {
 	private Date comment_date;
 	private String approved_by;
 	private Date approved_date;
-	//private DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 	
-	//@OneToMany(mappedBy="news")
 	@ManyToOne
 	@JoinColumn(name="news_id")
-	
+	//@JsonIgnore //If we use this annotation, news will be ignored and will not be showed
 	private News news;
 	
 	public Comment() {

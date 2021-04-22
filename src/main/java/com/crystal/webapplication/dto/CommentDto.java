@@ -2,40 +2,41 @@ package com.crystal.webapplication.dto;
 
 import java.util.Date;
 
+//Object that will be returned to the user
 public class CommentDto {
+	 
+	private String comment_text;
+	private String author;
+	private Date comment_date;
 	
-	private String comment_text_dto;
-	private String comment_author_dto;
-	private Date comment_date_dto;
-	
-	public CommentDto(String comment_text_dto, String comment_author_dto, Date comment_date_dto) {
-		this.comment_text_dto = comment_text_dto;
-		this.comment_author_dto = comment_author_dto;
-		this.comment_date_dto = comment_date_dto;
+	public CommentDto(String comment_text, String author, Date comment_date) {
+		this.comment_text = comment_text;
+		this.author = author;
+		this.comment_date = comment_date;
 	}
 
 	public String getComment_text() {
-		return comment_text_dto;
+		return comment_text;
 	}
 
-	public void setComment_text(String comment_text_dto) {
-		this.comment_text_dto = comment_text_dto;
+	public void setComment_text(String comment_text) {
+		this.comment_text = comment_text;
 	}
 
 	public String getComment_author() {
-		return comment_author_dto;
+		return author;
 	}
 
-	public void setComment_author(String comment_author_dto) {
-		this.comment_author_dto = comment_author_dto;
+	public void setComment_author(String author) {
+		this.author = author;
 	}
 
 	public Date getComment_date() {
-		return comment_date_dto;
+		return comment_date;
 	}
 
 	public void setComment_date(Date comment_date_dto) {
-		this.comment_date_dto = comment_date_dto;
+		this.comment_date = comment_date_dto;
 	}
 	
 }

@@ -56,4 +56,5 @@ public class NewsServices {
 		return newsM.modelMapper(newsRepository.getOne(id));
 	}
 
+
 }

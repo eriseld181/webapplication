@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity(name = "news")
 //pse e duam kete?
@@ -24,13 +25,11 @@ public class News {
 	private String creation_date;
 	private String author;
 	
-	@OneToMany
-	@JoinTable(name = "comments", 
-	joinColumns =@JoinColumn(name = "id"),
-	inverseJoinColumns = @JoinColumn(name="news_id"))
+	@OneToMany(targetEntity = Comment.class, mappedBy="news")
+	
 	
 	private List<Comment> comments;
-	
+	 //@JsonIgnore
 	public List<Comment> getComments() {
 		return comments;
 	}
