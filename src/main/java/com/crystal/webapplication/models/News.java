@@ -19,7 +19,7 @@ public class News {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private int news_id;
+	private int id;
 	private String title;
 	private String description;
 	private String creation_date;
@@ -60,7 +60,7 @@ public class News {
 		this.author = author;
 	}
 	public int getNewsId() {
-		return news_id;
+		return id;
 	}
 	
 	

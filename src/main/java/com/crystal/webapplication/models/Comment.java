@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name= "comments")
@@ -27,7 +28,7 @@ public class Comment {
 	
 	@ManyToOne
 	@JoinColumn(name="news_id")
-	//@JsonIgnore //If we use this annotation, news will be ignored and will not be showed
+	@JsonIgnore //If we use this annotation, news will be ignored and will not be showed
 	private News news;
 	
 	public Comment() {
