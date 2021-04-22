@@ -19,14 +19,12 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
+	//List all comments
 	public List<Comment> list(){
 		return commentRepository.findAll();
 	}
 	
-	public Comment create(Comment comment) {
-		return commentRepository.saveAndFlush(comment);		   
-	}
-	
+	//List all comments for a specific news
 	public List<CommentDto> listAllCommentsOfANews(Integer news_id){
 		
 		List<Comment> comments= commentRepository.findAllByNewsId(news_id);
@@ -38,16 +36,19 @@ public class CommentService {
 		return commentsDto;
 	}
 	
+	//Create a comment
+	public Comment createAComment(Comment comment) {
+		return commentRepository.saveAndFlush(comment);		   
+	}
+	
+	
+	//Delete all comments by id and author. Method defined in commentRepository interface
 	@Transactional
 	public void deleteCommentByIdAndAuthor(Integer id, String author) {
 		commentRepository.deleteByIdAndAuthor(id, author);
 	}
 	
-	
-	public Comment createAComment(Comment comment) {
-		return commentRepository.saveAndFlush(comment);
-	}
-	
+	//Update approved_by and approved_date in order to approve the comment
 	public Comment updateToApprove(Integer id, Comment comment) {
 		Comment existingComment= commentRepository.getOne(id);
 		existingComment.setComment_approved_by(comment.getComment_approved_by());
