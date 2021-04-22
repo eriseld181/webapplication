@@ -19,15 +19,14 @@ public class News {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private Long id;
+	private int id;
 	private String title;
 	private String description;
 	private String creation_date;
 	private String author;
 	
 	@OneToMany(targetEntity = Comment.class, mappedBy="news")
-	
-	
+
 	private List<Comment> comments;
 	 //@JsonIgnore
 	public List<Comment> getComments() {
@@ -60,7 +59,7 @@ public class News {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	

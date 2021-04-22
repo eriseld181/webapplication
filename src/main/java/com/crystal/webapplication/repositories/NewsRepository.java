@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.crystal.webapplication.models.News;
 
-public interface NewsRepository extends JpaRepository<News, Long> {
+public interface NewsRepository extends JpaRepository<News, Integer> {
 	@Query("select n from news n where title like %?1%")
  List<News> findByTitle(String title);
 

@@ -31,7 +31,7 @@ public class NewsServices {
 		return newsRepository.findAll();
 	}
 
-	public void deleteOne(Long id) {
+	public void deleteOne(int id) {
 
 		newsRepository.deleteById(id);
 	}
@@ -41,17 +41,17 @@ public class NewsServices {
 		return newsRepository.saveAndFlush(news);
 	}
 	//funksjoni per te bere update nje specific news
-	public News updateOne( Long id,  News news) {
+	public News updateOne( int id,  News news) {
 	 	News exisitingNews = newsRepository.getOne(id);
 		BeanUtils.copyProperties(news, exisitingNews, "id");
 	 	return newsRepository.saveAndFlush(exisitingNews);
 		
 	}
-	public News getFirst( Long id) {
+	public News getFirst( int id) {
 		return newsRepository.getOne(id);
 	}
 	
-	public NewsDto getSome(Long id) {
+	public NewsDto getSome(int id) {
 		NewsMapper newsM = new NewsMapper();
 		return newsM.modelMapper(newsRepository.getOne(id));
 	}
