@@ -19,6 +19,13 @@ public class WeatherMapper {
             weatherDto.setMin(min(weather));
             return weatherDto;
         }
+        public WeatherDto converttoDto2(Weather weather){
+            WeatherDto weatherDto = new WeatherDto();
+            weatherDto.setDate(weather.getIdweather());
+            weatherDto.setMin(min(weather));
+            weatherDto.setMax(max(weather));
+            return weatherDto;
+        }
         private double max(Weather weather){
             double max = weather.getTemp_morning();
             if(weather.getTemp_midday()>max) max = weather.getTemp_midday();

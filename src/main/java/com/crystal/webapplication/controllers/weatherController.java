@@ -2,6 +2,7 @@ package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.repositories.WeatherRepository;
+import com.crystal.webapplication.services.WeatherServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/v1/weathers")
 public class weatherController {
     @Autowired
-    private WeatherRepository weatherRepository;
+    private WeatherServices weatherServices;
 
     @GetMapping
     public List<Weather> list(){
