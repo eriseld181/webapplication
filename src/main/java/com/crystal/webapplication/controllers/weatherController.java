@@ -53,14 +53,20 @@ public class weatherController {
         return dto_vetem;
     }
     @GetMapping
-    @RequestMapping("/findall")
-    public List<WeatherDto> getAll(){
+    @RequestMapping("/findalldto")
+    public List<WeatherDto> getAllDto(){
         get();
         List<WeatherDto> w = new ArrayList<>();
         for(Weather j : full){
             w.add(WeatherMapper.converttoDto(j));
         }
         return w;
+    }
+    @GetMapping
+    @RequestMapping("/findall")
+    public List<Weather> getAll(){
+        return weatherRepository.findAll();
+        //return w;
     }
     @GetMapping
     @RequestMapping("/findspecific/{nr_days}")
@@ -74,14 +80,15 @@ public class weatherController {
         }
         return liste_dto;
     }
+
     @RequestMapping(value = "/delete/{idweather}" ,method = RequestMethod.DELETE)
     public void delete(@PathVariable String idweather){
         weatherRepository.deleteById(idweather);
     }
     @PostMapping("/insert")
     public Weather create(@RequestBody final Weather weather){
-        get();
-        getall(10);
+        //get();
+        //getall(10);
         return weatherRepository.saveAndFlush(weather);
     }
     public void get(){
