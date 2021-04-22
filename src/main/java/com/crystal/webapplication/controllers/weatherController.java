@@ -23,6 +23,13 @@ public class weatherController {
         LocalDate localDate = LocalDate.parse(idweather);
         return weatherServices.getWeatherDetails(localDate);
     }
+    //return one record with specified id-> date
+    @GetMapping
+    @RequestMapping("/one/{idweather}")
+    public Weather Weather(@PathVariable String idweather){
+        LocalDate localDate = LocalDate.parse(idweather);
+        return weatherServices.getWeatherDetails(localDate);
+    }
     //search x number of days
     @GetMapping
     @RequestMapping("/number/{numberofdays}")
