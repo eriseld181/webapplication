@@ -1,9 +1,10 @@
 package com.crystal.webapplication.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class WeatherDto {
-    private String idweather;
+    private LocalDate idweather;
     private double t_morn;
     private double t_mid;
     private double t_after;
@@ -12,11 +13,11 @@ public class WeatherDto {
     private double avg;
 
 
-    public String getDate() {
+    public LocalDate getDate() {
         return idweather;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.idweather = date;
     }
 

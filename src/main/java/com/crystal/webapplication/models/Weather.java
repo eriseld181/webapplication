@@ -2,13 +2,14 @@ package com.crystal.webapplication.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name="weather")
 public class Weather {
       @Id
       //@GeneratedValue(strategy = GenerationType.SEQUENCE)
-      private  String idweather;
+      private LocalDate idweather;
       private String weather_day_name;
       private String weather_description;
       private double temp_morning;
@@ -17,11 +18,11 @@ public class Weather {
 
       public Weather(){}
 
-    public String getIdweather() {
+    public LocalDate getIdweather() {
         return idweather;
     }
 
-    public void setIdweather(String idweather) {
+    public void setIdweather(LocalDate idweather) {
         this.idweather = idweather;
     }
 
