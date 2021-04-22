@@ -1,5 +1,6 @@
 package com.crystal.webapplication.controllers;
 
+import com.crystal.webapplication.dto.WeatherDto;
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.repositories.WeatherRepository;
 import com.crystal.webapplication.services.WeatherServices;
@@ -15,34 +16,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/weathers")
 public class weatherController {
+//    @Autowired
+//    private WeatherServices weatherServices;
     @Autowired
-    private WeatherServices weatherServices;
+    private WeatherRepository weatherRepository;
 
+
+//    @GetMapping
+//    public List<Weather> list(){
+//        return weatherRepository.findAll();
+//    }
+//    @GetMapping
+//    @RequestMapping("{idweather}")
+//    public Weather get(@PathVariable String idweather) throws ParseException {
+//        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
+//        return weatherRepository.getOne(date);
+//    }
+//    @PostMapping
+//    public Weather create(@RequestBody final Weather weather){
+//        return weatherServices.saveAndFlush(weather);
+//    }
     @GetMapping
-    public List<Weather> list(){
+    @RequestMapping(/*"/{idweather}"*/)
+    public List<Weather> get(/*@PathVariable Long idweather*/){
         return weatherRepository.findAll();
     }
-    @GetMapping
-    @RequestMapping("{idweather}")
-    public Weather get(@PathVariable String idweather) throws ParseException {
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
-        return weatherRepository.getOne(date);
-    }
-    @PostMapping
-    public Weather create(@RequestBody final Weather weather){
-        return weatherRepository.saveAndFlush(weather);
-    }
-    @RequestMapping(value = "{idweather}",method = RequestMethod.DELETE)
-    public void delete(@PathVariable String idweather) throws ParseException {
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
-        weatherRepository.deleteById(date);
-    }
-    @RequestMapping(value = "{idweather}", method = RequestMethod.PUT)
-    public Weather update(@PathVariable String idweather, @RequestBody Weather weather) throws ParseException {
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
-        Weather existingWeather = weatherRepository.getOne(date);
-        BeanUtils.copyProperties(weather,existingWeather,"idweather");
-        return weatherRepository.saveAndFlush(existingWeather);
-    }
+//    @RequestMapping(value = "{idweather}",method = RequestMethod.DELETE)
+//    public void delete(@PathVariable String idweather) throws ParseException {
+//        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
+//        weatherRepository.deleteById(date);
+//    }
+//    @RequestMapping(value = "{idweather}", method = RequestMethod.PUT)
+//    public Weather update(@PathVariable String idweather, @RequestBody Weather weather) throws ParseException {
+//        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(idweather);
+//        Weather existingWeather = weatherRepository.getOne(date);
+//        BeanUtils.copyProperties(weather,existingWeather,"idweather");
+//        return weatherRepository.saveAndFlush(existingWeather);
+//    }
 
 }

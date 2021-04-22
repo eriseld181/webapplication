@@ -8,7 +8,7 @@ import java.util.Date;
 public class Weather {
       @Id
       //@GeneratedValue(strategy = GenerationType.SEQUENCE)
-      private String idweather;
+      private  String idweather;
       private String weather_day_name;
       private String weather_description;
       private double temp_morning;
