@@ -34,8 +34,8 @@ public class weatherController {
         LocalDate localDate = LocalDate.parse(idweather);
         weatherServices.deleteByDate(localDate);
     }
-//    @PostMapping("/insert")
-//    public Weather create(@RequestBody final Weather weather){
-//        return weatherRepository.saveAndFlush(weather);
-//    }
+    @PostMapping("/insert")
+    public Weather create(@RequestBody final Weather weather){
+        return weatherServices.insert(weather);
+    }
 }
