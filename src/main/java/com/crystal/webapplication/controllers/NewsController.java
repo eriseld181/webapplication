@@ -47,12 +47,12 @@ public class NewsController {
 	
 
 	@RequestMapping("{id}")
-	public News getAllFields(@PathVariable Long id) {
+	public News getAllFields(@PathVariable int id) {
 		return newsService.getFirst(id);
 	}
 	@RequestMapping("/some/{id}")
 	
-	public NewsDto get(@PathVariable Long id) {
+	public NewsDto get(@PathVariable int id) {
 		return newsService.getSome(id);
 	}
 	//funksjoni per te futur nje vlere, request body duhet ne te njejtin vend me postmapping
@@ -64,13 +64,13 @@ public class NewsController {
 	//fshin nje element
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	
-	public void delete(@PathVariable Long id) {
+	public void delete(@PathVariable int id) {
 		
 		newsService.deleteOne(id);
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.PUT)
-	public News update(@PathVariable Long id, @RequestBody  News news) {
+	public News update(@PathVariable int id, @RequestBody  News news) {
 		return newsService.updateOne(id, news );
 	}
 
