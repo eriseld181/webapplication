@@ -44,7 +44,7 @@ public class  WeatherServices {
     public void deleteByDate(LocalDate localDate){
         weatherRepository.deleteById(localDate);
     }
-//    public void insert(Weather weather){
-//
-//    }
+    public Weather insert(Weather weather){
+        return weatherRepository.saveAndFlush(weather);
+    }
 }
