@@ -30,6 +30,14 @@ public class  WeatherServices {
         if(weather.isPresent()) weatherDto = WeatherMapper.converttoDto2(weather.get());
         return weatherDto;
     }
+    //return object weather not Dto
+     public Weather getWeatherDetails(LocalDate localDate){
+        //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Optional<Weather> weather =  weatherRepository.findById(localDate);
+        Weather weathe =  new Weather();
+        if(weather.isPresent()) weathe = weather.get();
+        return weathe;
+    }
 
     public List<WeatherDto> getWeatherDetailsforxdays(int nr) {
         LocalDate localDate = LocalDate.now();
