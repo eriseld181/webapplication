@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 public class WeatherMapper {
-        public WeatherDto converttoDto(Weather weather){
+        public static WeatherDto converttoDto(Weather weather){
 
 
             WeatherDto weatherDto = new WeatherDto();

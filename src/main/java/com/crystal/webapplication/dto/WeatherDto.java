@@ -3,7 +3,7 @@ package com.crystal.webapplication.dto;
 import java.util.Date;
 
 public class WeatherDto {
-    private Date date;
+    private String date;
     private double t_morn;
     private double t_mid;
     private double t_after;
@@ -12,11 +12,11 @@ public class WeatherDto {
     private double avg;
 
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
