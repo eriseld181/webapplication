@@ -41,8 +41,8 @@ public class NewsController {
 		return newsService.list();
 	}
 	@RequestMapping("/search")
-	public List<News> findAll(@RequestParam Optional<String> title){
-		return newsRepository.findByTitle(title.orElse("_"));
+	public List<News> findAll(@RequestParam String title){
+		return newsRepository.findByTitle(title);
 	}
 	
 
