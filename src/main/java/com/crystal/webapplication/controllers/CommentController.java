@@ -17,7 +17,7 @@ import com.crystal.webapplication.models.Comment;
 import com.crystal.webapplication.services.CommentService;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/comment") //the url: localhost:8080/comment
 public class CommentController {
 	@Autowired
  	private CommentService commentService;
@@ -28,7 +28,7 @@ public class CommentController {
 	}
 	
 	@GetMapping
-	@RequestMapping("{news_id}")
+	@RequestMapping("{news_id}") 
 	public List<CommentDto> getAllCommentsOfANews(@PathVariable (value="news_id") Integer news_id){
 		return commentService.listAllCommentsOfANews(news_id);
 	}

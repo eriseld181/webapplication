@@ -2,8 +2,9 @@ package com.crystal.webapplication.dto;
 
 import java.util.Date;
 
+//Object that will be returned to the user
 public class CommentDto {
-	
+	 
 	private String comment_text;
 	private String author;
 	private Date comment_date;

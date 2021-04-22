@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	//Read all comments for a specific news
 	public List<Comment> findAllByNewsId(Integer news_id);
 	
-	//Delete comment
+	//Delete comment by id and author
 	public void deleteByIdAndAuthor(Integer id, String author);
 	
 //	@Query("DELETE FROM comments c WHERE c.id= :id and c.author= :author")
