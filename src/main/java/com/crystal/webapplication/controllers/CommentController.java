@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.crystal.webapplication.dto.CommentDto;
 import com.crystal.webapplication.models.Comment;
@@ -28,7 +31,7 @@ public class CommentController {
 	}
 	
 	@GetMapping
-	@RequestMapping("{news_id}") 
+	@RequestMapping("/api/{news_id}") 
 	public List<CommentDto> getAllCommentsOfANews(@PathVariable (value="news_id") Integer news_id){
 		return commentService.listAllCommentsOfANews(news_id);
 	}
@@ -40,8 +43,10 @@ public class CommentController {
 	}
 	
 	@PostMapping
-	public Comment create(@RequestBody final Comment comment) {
-		return commentService.createAComment(comment);		   
+	@RequestMapping("{news_id}") 
+	public Comment create(@PathVariable (value="news_id") Integer news_id, @RequestBody final Comment comment) {
+		return commentService.createAComment(news_id, comment);
+
 	}	
 	
 	//@RequestMapping(value="{id}", method= RequestMethod.PATCH)

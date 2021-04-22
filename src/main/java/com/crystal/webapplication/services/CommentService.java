@@ -5,19 +5,25 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.crystal.webapplication.dto.CommentDto;
 import com.crystal.webapplication.mappers.CommentMapper;
 import com.crystal.webapplication.models.Comment;
+import com.crystal.webapplication.models.News;
 import com.crystal.webapplication.repositories.CommentRepository;
+import com.crystal.webapplication.repositories.NewsRepository;
 
 @Service
 public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+	private NewsRepository newsRepository;
 	
 	//List all comments
 	public List<Comment> list(){
@@ -37,8 +43,9 @@ public class CommentService {
 	}
 	
 	//Create a comment
-	public Comment createAComment(Comment comment) {
-		return commentRepository.saveAndFlush(comment);		   
+	public Comment createAComment(int news_id, Comment comment) {
+		News news= newsRepository.getOne(news_id);
+		return commentRepository.saveAndFlush(comment);
 	}
 	
 	
