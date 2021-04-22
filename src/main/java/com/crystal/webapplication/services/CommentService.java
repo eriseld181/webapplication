@@ -1,52 +1,61 @@
 package com.crystal.webapplication.services;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.crystal.webapplication.dto.CommentDto;
+import com.crystal.webapplication.mappers.CommentMapper;
 import com.crystal.webapplication.models.Comment;
 import com.crystal.webapplication.repositories.CommentRepository;
 
 @Service
 public class CommentService {
+	@Autowired
+	private CommentRepository commentRepository;
 	
-//	@Autowired
-// 	private CommentRepository commentRepository;
-//	
-//	@GetMapping
-//	public List<Comment> list(){
-//		return commentRepository.findAll();
-//	}
-//	
-//	@GetMapping
-//	@RequestMapping("{news_id}")
-//	public List<Comment> findAllByNews_id(@RequestBody Integer news_id){
-//		return commentRepository.findAllByNews_id(news_id);
-//	}
-//	
-//	@PostMapping
-//	public Comment create(@RequestBody final Comment comment) {											   
-//		return commentRepository.saveAndFlush(comment);		   
-//	}	
-//	
-//	@RequestMapping(value = "{id}/{author}", method = RequestMethod.DELETE)
-//	public void delete(@PathVariable Integer id, @PathVariable String author) {
-//		// Also need to check for children record before deleting.... TO DO
-//		commentRepository.deleteCommentByIdandAuthor(id, author);
-//	}
-//	
-//	@RequestMapping(value="{id}", method= RequestMethod.PUT)
-//	public Comment update(@PathVariable Integer id, @RequestBody String approved_by, @RequestBody Date approved_date) {
-//		
-//		Comment existingComment= commentRepository.getOne(id); 
-//		return commentRepository.saveAndFlush(existingComment);
-//	}
+	public List<Comment> list(){
+		return commentRepository.findAll();
+	}
+	
+	public Comment create(Comment comment) {
+		return commentRepository.saveAndFlush(comment);		   
+	}
+	
+	public List<CommentDto> listAllCommentsOfANews(Integer news_id){
+		
+		List<Comment> comments= commentRepository.findAllByNewsId(news_id);
+		List<CommentDto> commentsDto= new ArrayList<>();
+		for (Comment comment : comments) {
+			CommentDto dto= CommentMapper.mappCommentToDto(comment);
+			commentsDto.add(dto);
+		}
+		return commentsDto;
+	}
+	
+	@Transactional
+	public void deleteCommentByIdAndAuthor(Integer id, String author) {
+		commentRepository.deleteByIdAndAuthor(id, author);
+	}
+	
+	
+	public Comment createAComment(Comment comment) {
+		return commentRepository.saveAndFlush(comment);
+	}
+	
+	public Comment updateToApprove(Integer id, Comment comment) {
+		Comment existingComment= commentRepository.getOne(id);
+		existingComment.setComment_approved_by(comment.getComment_approved_by());
+		existingComment.setComment_approved_date(comment.getComment_approved_date());
+		//BeanUtils.copyProperties(comment, existingComment, "id");
+		//BeanUtils.copyProperties(comment, existingComment, "id", "news_id", "comment_text", "author", "comment_date");
+		//BeanUtils.copyProperties(comment, existingComment, "id, news_id, comment_text, author, comment_date");
+		return commentRepository.saveAndFlush(existingComment);
+	}
+
 }
