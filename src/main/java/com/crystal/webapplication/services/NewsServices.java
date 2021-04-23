@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.crystal.webapplication.controllers.NewsController;
 
 import com.crystal.webapplication.dto.NewsDto;
@@ -34,6 +36,10 @@ public class NewsServices {
 	public void deleteOne(int id) {
 
 		newsRepository.deleteById(id);
+	}
+	//per te bere search
+	public List<News> findByTitleFunction(String title){
+		return newsRepository.findByTitle(title);
 	}
 
 	// funsjoni per per te krijuar nje news te ri
