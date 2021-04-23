@@ -24,11 +24,11 @@ public class  WeatherServices {
     @Autowired
     private WeatherRepository weatherRepository;
 
-    public WeatherDto2 getWeatherDetailsDto(LocalDate localDate){
+    public WeatherDto getWeatherDetailsDto(LocalDate localDate){
         //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Weather> weather =  weatherRepository.findById(localDate);
-        WeatherDto2 weatherDto =  new WeatherDto2();
-        /*if(weather.isPresent())*/ weatherDto = WeatherMapper.converttoDto1(weather.get());
+        WeatherDto weatherDto =  new WeatherDto();
+        /*if(weather.isPresent())*/ weatherDto = WeatherMapper.converttoDto(weather.get());
         return weatherDto;
     }
     //return object weather not Dto
