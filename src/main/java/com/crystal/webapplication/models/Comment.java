@@ -2,6 +2,7 @@ package com.crystal.webapplication.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Comment {
 	private Date comment_date;
 	private String approved_by;
 	private Date approved_date;
-	
+		
 	@ManyToOne
 	@JoinColumn(name="news_id")
 	@JsonIgnore //If we use this annotation, news will be ignored and will not be showed
