@@ -43,6 +43,14 @@ public class WeatherMapper {
         }
         return weatherDto2;
     }
+    public static WeatherDto2 converttoDto1(Weather weather) {
+            WeatherDto2 weatherDto21 = new WeatherDto2();
+            weatherDto21.setDate(weather.getIdweather());
+            weatherDto21.setMin(min(weather));
+            weatherDto21.setMax(max(weather));
+
+        return weatherDto21;
+    }
 
     private static double max(Weather weather) {
         double max = weather.getTemp_morning();
