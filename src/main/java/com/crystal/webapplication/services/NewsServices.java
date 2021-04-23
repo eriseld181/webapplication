@@ -1,5 +1,7 @@
 package com.crystal.webapplication.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -44,6 +46,10 @@ public class NewsServices {
 
 	// funsjoni per per te krijuar nje news te ri
 	public News create( News news) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		   LocalDateTime now = LocalDateTime.now();  
+		  
+		news.setCreation_date(dtf.format(now));
 		return newsRepository.saveAndFlush(news);
 	}
 	//funksjoni per te bere update nje specific news
