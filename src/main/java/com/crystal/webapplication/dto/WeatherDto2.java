@@ -7,7 +7,6 @@ public class WeatherDto2 {
     private LocalDate idweather;
     private double max;
     private double min;
-    private double avg;
 
 
     public LocalDate getDate() {
@@ -34,11 +33,4 @@ public class WeatherDto2 {
         this.min = min;
     }
 
-    public double getAvg() {
-        return avg;
-    }
-
-    public void setAvg(double avg) {
-        this.avg = avg;
-    }
 }
