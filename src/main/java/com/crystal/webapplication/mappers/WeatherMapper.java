@@ -4,6 +4,8 @@ import com.crystal.webapplication.dto.WeatherDto;
 import com.crystal.webapplication.dto.WeatherDto2;
 import com.crystal.webapplication.models.Weather;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,11 +32,15 @@ public class WeatherMapper {
         return weatherDto;
     }
 
-    public static WeatherDto2 converttoDto1(Weather weather) {
-        WeatherDto2 weatherDto2 = new WeatherDto2();
-        weatherDto2.setDate(weather.getIdweather());
-        weatherDto2.setMin(min(weather));
-        weatherDto2.setMax(max(weather));
+    public static List<WeatherDto2> converttoDto1(List<Weather> weather) {
+        List<WeatherDto2> weatherDto2 = new ArrayList<>();
+        for(Weather w : weather) {
+            WeatherDto2 weatherDto21 = new WeatherDto2();
+            weatherDto21.setDate(w.getIdweather());
+            weatherDto21.setMin(min(w));
+            weatherDto21.setMax(max(w));
+            weatherDto2.add(weatherDto21);
+        }
         return weatherDto2;
     }
 
