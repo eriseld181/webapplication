@@ -27,7 +27,7 @@ public class  WeatherServices {
         //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Weather> weather =  weatherRepository.findById(localDate);
         WeatherDto weatherDto =  new WeatherDto();
-        if(weather.isPresent()) weatherDto = WeatherMapper.converttoDto2(weather.get());
+        /*if(weather.isPresent())*/ weatherDto = WeatherMapper.converttoDto2(weather.get());
         return weatherDto;
     }
     //return object weather not Dto

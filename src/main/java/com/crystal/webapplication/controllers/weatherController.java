@@ -42,7 +42,7 @@ public class weatherController {
         weatherServices.deleteByDate(localDate);
     }
     @PostMapping("/insert")
-    public Weather create(@RequestBody final Weather weather){
-        return weatherServices.insert(weather);
+    public WeatherDto create(@RequestBody final Weather weather){
+        return WeatherMapper.converttoDto(weatherServices.insert(weather));
     }
 }
