@@ -44,17 +44,20 @@ public class CommentService {
 	
 	//Create a comment
 	public boolean createAComment(int news_id, Comment comment) {
+		//check if comment is not null
 		if(comment != null) {
+			//if the comment or author is null then return false
 			if(comment.getComment_author()==null || comment.getComment_text()==null) {
 				return false;
-			}
-			Date date= new Date();
-			comment.setComment_date(date);
-			News news= newsRepository.getOne(news_id);
-			comment.setNews(news);	
+			}	
 		}
+		//if everything is ok
+		Date date= new Date();
+		comment.setComment_date(date);
+		News news= newsRepository.getOne(news_id);
+		comment.setNews(news);	
 		commentRepository.saveAndFlush(comment);
-		return false;
+		return true;
 	}
 	
 	
@@ -66,12 +69,15 @@ public class CommentService {
 	
 	//Update approved_by and approved_date in order to approve the comment
 	public boolean updateToApprove(Integer id, Comment comment) {
+		//check if comment is not null
 		if(comment != null) {
+			//if the attribute approved_by or approved_date is null then return false
 			if(comment.getComment_approved_by()==null || comment.getComment_approved_date()==null) {
 				Comment newComment= new Comment();
 				return false;
 			}
 		}
+		//if everything is ok
 		Comment existingComment= commentRepository.getOne(id);
 		existingComment.setComment_approved_by(comment.getComment_approved_by());
 		existingComment.setComment_approved_date(comment.getComment_approved_date());

@@ -38,9 +38,11 @@ public class CommentController {
 	//LIST ALL COMMENTS
 	@GetMapping
 	public ResponseEntity<List<Comment>> getAll(){
+		//if the list of comments is not null
 		if(commentRepository.findAll().size()!=0) {
 			return ResponseEntity.status(HttpStatus.OK).body(commentService.list());
 		}
+		//if the list of comments is null
 		else {
 			List<Comment> commentList= new ArrayList<>();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(commentList);
@@ -50,9 +52,11 @@ public class CommentController {
 	//LIST ALL COMMENTS FOR A NEWS
 	@GetMapping("/api/{news_id}") 
 	public ResponseEntity<List<CommentDto>> getAllCommentsOfANews(@PathVariable (value="news_id") Integer news_id){
+		//if a news with this news_id exists
 		if(newsRepository.existsById(news_id)) {
 			return ResponseEntity.status(HttpStatus.OK).body(commentService.listAllCommentsOfANews(news_id));
 		}
+		//if a news with this news_id does not exist
 		else {
 			List<CommentDto> commentListDto= new ArrayList<>();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(commentListDto);
@@ -62,6 +66,7 @@ public class CommentController {
 	//DELETE A COMMENT
 	@DeleteMapping("{id}/{author}")
 	public ResponseEntity<String> delete(@PathVariable (value= "id") Integer id, @PathVariable (value= "author") String author) {
+		//if there is a comment with this id and author
 		if(commentRepository.existsByIdAndAuthor(id, author)) {
 			commentService.deleteCommentByIdAndAuthor(id, author);
 			return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");	
@@ -73,7 +78,9 @@ public class CommentController {
 	//CREATE A COMMENT
 	@PostMapping("{news_id}") 
 	public ResponseEntity<String> create(@PathVariable (value="news_id") Integer news_id, @RequestBody final Comment comment) {
+		//if a news with this news_id exists
 		if(newsRepository.existsById(news_id)) {
+			//if the comment is created
 			if(commentService.createAComment(news_id, comment)) {
 				return ResponseEntity.status(HttpStatus.OK).body("Comment created");
 			}
@@ -86,8 +93,10 @@ public class CommentController {
 	
 	//UPDATE-APPROVE A COMMENT
 	@RequestMapping(value="{id}", method= RequestMethod.PUT)
-	public ResponseEntity<String> approve(@PathVariable(value= "id") Integer id, @RequestBody Comment comment) {		
+	public ResponseEntity<String> approve(@PathVariable(value= "id") Integer id, @RequestBody Comment comment) {	
+		//if a comment with this id exists
 		if(commentRepository.existsById(id)) {
+			//if the comment is updated
 			if(commentService.updateToApprove(id, comment)) {
 				return ResponseEntity.status(HttpStatus.OK).body("Comment updated");
 			}
