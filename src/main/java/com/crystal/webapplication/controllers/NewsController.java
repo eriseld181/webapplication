@@ -30,7 +30,7 @@ import com.crystal.webapplication.services.NewsServices;
 public class NewsController {
 	
 	@Autowired
-	private NewsServices newsService;
+	private NewsServices newsService ;
 	//private NewsDto newsDto;
 	@Autowired
 	private NewsRepository newsRepository;
@@ -42,8 +42,9 @@ public class NewsController {
 	}
 	@RequestMapping("/search")
 	public List<News> findAll(@RequestParam String title){
-		return newsRepository.findByTitle(title);
+		return newsService.findByTitleFunction(title);
 	}
+	
 	
 
 	@RequestMapping("{id}")
