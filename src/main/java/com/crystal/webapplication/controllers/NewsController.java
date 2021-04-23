@@ -23,59 +23,59 @@ import com.crystal.webapplication.models.News;
 
 import com.crystal.webapplication.services.NewsServices;
 
-
 //ben rest api
 @RestController
 //vendos url per metoden e pershtatshme
 @RequestMapping("/api/news")
 public class NewsController {
-	
+
 	@Autowired
-	private NewsServices newsService ;
-	//private NewsDto newsDto;
+	private NewsServices newsService;
+	// private NewsDto newsDto;
 	@Autowired
 	private NewsRepository newsRepository;
-	//private NewsDto newsDto;
-	
+	// private NewsDto newsDto;
+
 	@GetMapping
 	public List<News> myMethod() {
 		return newsService.list();
 	}
+
 	@RequestMapping("/search")
-	public List<News> findAll(@RequestParam String title){
+	public List<News> findAll(@RequestParam String title) {
 		return newsService.findByTitleFunction(title);
 	}
-	
-	
 
 	@RequestMapping("{id}")
 	public News getAllFields(@PathVariable int id) {
 		return newsService.getFirst(id);
 	}
+
 	@RequestMapping("/some/{id}")
-	
+
 	public NewsDto get(@PathVariable int id) {
 		return newsService.getSome(id);
 	}
-	//funksjoni per te futur nje vlere, request body duhet ne te njejtin vend me postmapping
+
+	// funksjoni per te futur nje vlere, request body duhet ne te njejtin vend me
+	// postmapping
 	@PostMapping
 	public News createOne(@RequestBody final News news) {
 		return newsService.create(news);
 	}
-	
-	//fshin nje element
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-	
+
+	// fshin nje element
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+
 	public String delete(@PathVariable int id) {
 		newsService.deleteOne(id);
-		return "The user with selected "+id +" is deleted";
-		
-	}
-	
-	@RequestMapping(value="{id}", method = RequestMethod.PUT)
-	public News update(@PathVariable int id, @RequestBody  News news) {
-		return newsService.updateOne(id, news );
+		return "The user with selected " + id + " is deleted";
+
 	}
 
-	
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public News update(@PathVariable int id, @RequestBody News news) {
+		return newsService.updateOne(id, news);
+	}
+
 }
