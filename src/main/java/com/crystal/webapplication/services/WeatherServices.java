@@ -23,7 +23,7 @@ public class  WeatherServices {
     @Autowired
     private WeatherRepository weatherRepository;
 
-    public WeatherDto getWeatherDetails(LocalDate localDate){
+    public WeatherDto getWeatherDetailsDto(LocalDate localDate){
         //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Weather> weather =  weatherRepository.findById(localDate);
         WeatherDto weatherDto =  new WeatherDto();
@@ -35,7 +35,7 @@ public class  WeatherServices {
         //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Weather> weather =  weatherRepository.findById(localDate);
         Weather weathe =  new Weather();
-        if(weather.isPresent()) weathe = weather.get();
+        /*if(weather.isPresent())*/ weathe = weather.get();
         return weathe;
     }
 

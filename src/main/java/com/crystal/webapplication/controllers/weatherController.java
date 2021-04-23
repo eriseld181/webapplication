@@ -21,7 +21,7 @@ public class weatherController {
     @RequestMapping("/n/{idweather}")
     public WeatherDto WeatherDto(@PathVariable String idweather){
         LocalDate localDate = LocalDate.parse(idweather);
-        return weatherServices.getWeatherDetails(localDate);
+        return weatherServices.getWeatherDetailsDto(localDate);
     }
     //return one record with specified id-> date
     @GetMapping
