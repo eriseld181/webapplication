@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/weathers")
-public class weatherController {
+public class WeatherController {
     @Autowired
     WeatherServices weatherServices;
     //return weather details for a specific day
