@@ -1,11 +1,13 @@
 package com.crystal.webapplication.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.crystal.webapplication.dto.CommentDto;
 import com.crystal.webapplication.models.Comment;
+import com.crystal.webapplication.repositories.CommentRepository;
+import com.crystal.webapplication.repositories.NewsRepository;
 import com.crystal.webapplication.services.CommentService;
 
 @RestController
@@ -25,34 +29,73 @@ public class CommentController {
 	@Autowired
  	private CommentService commentService;
 	
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	@Autowired
+	private NewsRepository newsRepository;
+	
+	//LIST ALL COMMENTS
 	@GetMapping
-	public List<Comment> getAll(){
-		return commentService.list();
+	public ResponseEntity<List<Comment>> getAll(){
+		if(commentRepository.findAll().size()!=0) {
+			return ResponseEntity.status(HttpStatus.OK).body(commentService.list());
+		}
+		else {
+			List<Comment> commentList= new ArrayList<>();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(commentList);
+		}
 	}
 	
-	@GetMapping
-	@RequestMapping("/api/{news_id}") 
-	public List<CommentDto> getAllCommentsOfANews(@PathVariable (value="news_id") Integer news_id){
-		return commentService.listAllCommentsOfANews(news_id);
+	//LIST ALL COMMENTS FOR A NEWS
+	@GetMapping("/api/{news_id}") 
+	public ResponseEntity<List<CommentDto>> getAllCommentsOfANews(@PathVariable (value="news_id") Integer news_id){
+		if(newsRepository.existsById(news_id)) {
+			return ResponseEntity.status(HttpStatus.OK).body(commentService.listAllCommentsOfANews(news_id));
+		}
+		else {
+			List<CommentDto> commentListDto= new ArrayList<>();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(commentListDto);
+		}
 	}
 	
-	@GetMapping
-	@RequestMapping(value = "{id}/{author}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable (value= "id") Integer id, @PathVariable (value= "author") String author) {
-		commentService.deleteCommentByIdAndAuthor(id, author);
+	//DELETE A COMMENT
+	@DeleteMapping("{id}/{author}")
+	public ResponseEntity<String> delete(@PathVariable (value= "id") Integer id, @PathVariable (value= "author") String author) {
+		if(commentRepository.existsByIdAndAuthor(id, author)) {
+			commentService.deleteCommentByIdAndAuthor(id, author);
+			return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");	
+		}
+		else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error while deleting");	
 	}
 	
-	@PostMapping
-	@RequestMapping("{news_id}") 
-	public Comment create(@PathVariable (value="news_id") Integer news_id, @RequestBody final Comment comment) {
-		return commentService.createAComment(news_id, comment);
-
+	//CREATE A COMMENT
+	@PostMapping("{news_id}") 
+	public ResponseEntity<String> create(@PathVariable (value="news_id") Integer news_id, @RequestBody final Comment comment) {
+		if(newsRepository.existsById(news_id)) {
+			if(commentService.createAComment(news_id, comment)) {
+				return ResponseEntity.status(HttpStatus.OK).body("Comment created");
+			}
+			else
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error while inserting");
+		}
+		else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This news does not exist!");
 	}	
 	
-	//@RequestMapping(value="{id}", method= RequestMethod.PATCH)
+	//UPDATE-APPROVE A COMMENT
 	@RequestMapping(value="{id}", method= RequestMethod.PUT)
-	public Comment approve(@PathVariable(value= "id") Integer id, @RequestBody Comment comment) {		
-		return commentService.updateToApprove(id, comment);
+	public ResponseEntity<String> approve(@PathVariable(value= "id") Integer id, @RequestBody Comment comment) {		
+		if(commentRepository.existsById(id)) {
+			if(commentService.updateToApprove(id, comment)) {
+				return ResponseEntity.status(HttpStatus.OK).body("Comment updated");
+			}
+			else 
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error while updating");	
+		}
+		else 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This comment does not exist!");	
 	}
 	
 	

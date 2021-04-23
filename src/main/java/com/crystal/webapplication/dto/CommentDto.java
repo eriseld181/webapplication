@@ -15,6 +15,12 @@ public class CommentDto {
 		this.comment_date = comment_date;
 	}
 
+	@Override
+	public String toString() {
+		return "CommentDto [comment_text=" + comment_text + ", author=" + author + ", comment_date=" + comment_date
+				+ "]";
+	}
+
 	public String getComment_text() {
 		return comment_text;
 	}

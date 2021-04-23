@@ -17,6 +17,9 @@ public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	//Delete comment by id and author
 	public void deleteByIdAndAuthor(Integer id, String author);
 	
+	//Check before deleting if that comment exists
+	public boolean existsByIdAndAuthor(Integer id, String author);
+	
 //	@Query("DELETE FROM comments c WHERE c.id= :id and c.author= :author")
 //	public void deleteByIdAndAuthor(@Param("id") Integer id,@Param("author") String author);
 	
