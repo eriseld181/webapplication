@@ -1,6 +1,7 @@
 package com.crystal.webapplication.services;
 
 import com.crystal.webapplication.dto.WeatherDto;
+import com.crystal.webapplication.dto.WeatherDto2;
 import com.crystal.webapplication.mappers.WeatherMapper;
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.repositories.WeatherRepository;
@@ -39,14 +40,11 @@ public class  WeatherServices {
         return weathe;
     }
 
-    public List<WeatherDto> getWeatherDetailsforxdays(int nr) {
+    public List<WeatherDto2> getWeatherDetailsforxdays(int nr) {
         LocalDate localDate = LocalDate.now();
         localDate = localDate.plusDays(nr);
         List<Weather> weathers =  weatherRepository.getWeatherDetailsforxdates(localDate);
-        List<WeatherDto> weatherDtos = new ArrayList<>();
-        for(Weather w : weathers){
-            weatherDtos.add(WeatherMapper.converttoDto(w));
-        }
+        List<WeatherDto2> weatherDtos = WeatherMapper.converttoDto1(weathers);
         return weatherDtos;
     }
     public void deleteByDate(LocalDate localDate){

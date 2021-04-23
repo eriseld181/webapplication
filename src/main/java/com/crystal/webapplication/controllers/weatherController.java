@@ -1,6 +1,7 @@
 package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.dto.WeatherDto;
+import com.crystal.webapplication.dto.WeatherDto2;
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.services.WeatherServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class weatherController {
     //search x number of days
     @GetMapping
     @RequestMapping("/number/{numberofdays}")
-    public List<WeatherDto> WeatherDtos(@PathVariable int numberofdays){
+    public List<WeatherDto2> WeatherDtos(@PathVariable int numberofdays){
         return weatherServices.getWeatherDetailsforxdays(numberofdays);
     }
     @RequestMapping(value = "{idweather}",method = RequestMethod.DELETE)
