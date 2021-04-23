@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crystal.webapplication.dto.NewsDto;
@@ -65,9 +66,10 @@ public class NewsController {
 	//fshin nje element
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	
-	public void delete(@PathVariable int id) {
-		
+	public String delete(@PathVariable int id) {
 		newsService.deleteOne(id);
+		return "The user with selected "+id +" is deleted";
+		
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.PUT)
