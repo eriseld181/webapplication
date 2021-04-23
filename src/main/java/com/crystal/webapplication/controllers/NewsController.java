@@ -3,10 +3,14 @@ package com.crystal.webapplication.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import com.crystal.webapplication.mappers.Ex;
+import com.crystal.webapplication.models.MyResourceNotFoundException;
 import com.crystal.webapplication.models.News;
+import com.crystal.webapplication.models.Problem;
 import com.crystal.webapplication.repositories.NewsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +26,9 @@ import com.crystal.webapplication.dto.NewsDto;
 import com.crystal.webapplication.models.News;
 
 import com.crystal.webapplication.services.NewsServices;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.servlet.http.HttpServletResponse;
 
 //ben rest api
 @RestController
@@ -52,16 +59,19 @@ public class NewsController {
 	}
 
 	@RequestMapping("/some/{id}")
-
-	public NewsDto get(@PathVariable int id) {
-		return newsService.getSome(id);
+	public Object get(int id) {
+		//if(newsService.returngabim(id) instanceof NewsDto)
+		//return newsService.getSome(id);
+		//return
+		return newsService.returngabim(id);
 	}
 
 	// funksjoni per te futur nje vlere, request body duhet ne te njejtin vend me
 	// postmapping
 	@PostMapping
-	public News createOne(@RequestBody final News news) {
-		return newsService.create(news);
+	public News createOne(@RequestBody final News news, HttpServletResponse response){
+
+			return newsService.create(news);
 	}
 
 	// fshin nje element

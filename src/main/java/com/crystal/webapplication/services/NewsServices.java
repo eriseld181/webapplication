@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.crystal.webapplication.mappers.Ex;
+import com.crystal.webapplication.models.Problem;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,10 +64,20 @@ public class NewsServices {
 	public News getFirst( int id) {
 		return newsRepository.getOne(id);
 	}
-	
+
+	public Object returngabim(int id){
+		Problem problem = new Problem();
+		try	{
+			return getSome(id);
+		}catch(Exception e){
+			problem.setProbName("Nuk e gjet id that you provided");
+		}
+		return problem;
+	}
 	public NewsDto getSome(int id) {
 		NewsMapper newsM = new NewsMapper();
 		return newsM.modelMapper(newsRepository.getOne(id));
+
 	}
 
 
