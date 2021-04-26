@@ -3,14 +3,12 @@ package com.crystal.webapplication.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import com.crystal.webapplication.mappers.Ex;
-import com.crystal.webapplication.models.MyResourceNotFoundException;
 import com.crystal.webapplication.models.News;
-import com.crystal.webapplication.models.Problem;
 import com.crystal.webapplication.repositories.NewsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +24,10 @@ import com.crystal.webapplication.dto.NewsDto;
 import com.crystal.webapplication.models.News;
 
 import com.crystal.webapplication.services.NewsServices;
-import org.springframework.web.server.ResponseStatusException;
-
-import javax.servlet.http.HttpServletResponse;
 
 //ben rest api
 @RestController
+
 //vendos url per metoden e pershtatshme
 @RequestMapping("/api/news")
 public class NewsController {
@@ -59,28 +55,41 @@ public class NewsController {
 	}
 
 	@RequestMapping("/some/{id}")
-	public Object get(int id) {
-		//if(newsService.returngabim(id) instanceof NewsDto)
-		//return newsService.getSome(id);
-		//return
-		return newsService.returngabim(id);
+
+	public NewsDto get(@PathVariable int id) {
+		return newsService.getSome(id);
 	}
 
 	// funksjoni per te futur nje vlere, request body duhet ne te njejtin vend me
 	// postmapping
 	@PostMapping
-	public News createOne(@RequestBody final News news, HttpServletResponse response){
 
-			return newsService.create(news);
+	public ResponseEntity<News> createOne(@RequestBody final News news) {
+		try {
+			return ResponseEntity.ok()
+					// .header("Custom-Header", "foo")
+					.body(newsService.create(news));
+
+		} catch (Exception ex) {
+			
+			return new ResponseEntity(
+					"This news cannot be inserted into Database. Check 'title', 'description' or 'author'.",
+					HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	// fshin nje element
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 
-	public String delete(@PathVariable int id) {
-		newsService.deleteOne(id);
-		return "The user with selected " + id + " is deleted";
+	public ResponseEntity delete(@PathVariable int id) {
+		try {
+			newsService.deleteOne(id);
 
+			return new ResponseEntity("The user with selected " + id + " is deleted", HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity("The user with selected " + id + " is already deleted", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)

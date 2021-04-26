@@ -14,7 +14,7 @@ public class CommentDto {
 		this.author = author;
 		this.comment_date = comment_date;
 	}
-
+	
 	public String getComment_text() {
 		return comment_text;
 	}
@@ -38,5 +38,10 @@ public class CommentDto {
 	public void setComment_date(Date comment_date_dto) {
 		this.comment_date = comment_date_dto;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CommentDto [comment_text=" + comment_text + ", author=" + author + ", comment_date=" + comment_date
+				+ "]";
+	}
 }
