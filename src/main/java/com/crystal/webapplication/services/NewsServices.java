@@ -71,8 +71,9 @@ public class NewsServices {
 			return getSome(id);
 		}catch(Exception e){
 			problem.setProbName("Nuk e gjet id that you provided");
+			return problem;
 		}
-		return problem;
+
 	}
 	public NewsDto getSome(int id) {
 		NewsMapper newsM = new NewsMapper();

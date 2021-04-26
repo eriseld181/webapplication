@@ -2,14 +2,17 @@ package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.dto.WeatherDto;
 import com.crystal.webapplication.dto.WeatherDto2;
+import com.crystal.webapplication.mappers.Ex;
 import com.crystal.webapplication.models.Weather;
+import com.crystal.webapplication.repositories.WeatherRepository;
 import com.crystal.webapplication.services.WeatherServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.crystal.webapplication.mappers.WeatherMapper;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,30 +23,52 @@ public class WeatherController {
     //return weather details for a specific day
     @GetMapping
     @RequestMapping("/n/{idweather}")
-    public WeatherDto WeatherDto(@PathVariable String idweather){
+    public ResponseEntity WeatherDto(@PathVariable String idweather){
+
         LocalDate localDate = LocalDate.parse(idweather);
-        return  weatherServices.getWeatherDetailsDto(localDate);
+        if(weatherServices.getWeatherDetailsDto(localDate).getDate()==null){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("The date requested  " + idweather + " not found !");
+        }
+        else {
+            //WeatherDto weatherDto = new WeatherDto();
+            return ResponseEntity.status(HttpStatus.OK).body(weatherServices.getWeatherDetailsDto(localDate));
+        }
     }
     //return one record with specified id-> date
     @GetMapping
     @RequestMapping("/one/{idweather}")
-    public Weather Weather(@PathVariable String idweather){
+    public ResponseEntity Weather(@PathVariable String idweather){
         LocalDate localDate = LocalDate.parse(idweather);
-        return weatherServices.getWeatherDetails(localDate);
+        if(weatherServices.getWeatherDetails(localDate).getIdweather()==null){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("The date requested  " + idweather + " not found !");
+        }
+        else {
+            //WeatherDto weatherDto = new WeatherDto();
+            return ResponseEntity.status(HttpStatus.OK).body(weatherServices.getWeatherDetails(localDate));
+        }
     }
     //search x number of days
     @GetMapping
     @RequestMapping("/number/{numberofdays}")
-    public List<WeatherDto2> WeatherDtos(@PathVariable int numberofdays){
-        return weatherServices.getWeatherDetailsforxdays(numberofdays);
+    public ResponseEntity <List<WeatherDto2>> WeatherDtos(@PathVariable int numberofdays){
+        if(weatherServices.getWeatherDetailsforxdays(numberofdays).size()==0){
+            return  ResponseEntity.status(HttpStatus.NO_CONTENT).body(weatherServices.getWeatherDetailsforxdays(numberofdays));
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(weatherServices.getWeatherDetailsforxdays((numberofdays)));
+        }
     }
     @RequestMapping(value = "{idweather}",method = RequestMethod.DELETE)
-    public void delete(@PathVariable String idweather){
+    public ResponseEntity delete(@PathVariable String idweather){
         LocalDate localDate = LocalDate.parse(idweather);
-        weatherServices.deleteByDate(localDate);
+        try{
+            weatherServices.deleteByDate(localDate);
+            return   ResponseEntity.status(HttpStatus.OK).body("Date with id "+idweather+ " deleted successfully");
+        }catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(idweather+ " not found or is deleted");
+        }
     }
     @PostMapping("/insert")
-    public WeatherDto create(@RequestBody final Weather weather){
-        return WeatherMapper.converttoDto(weatherServices.insert(weather));
+    public Object create(@RequestBody final Weather weather){
+            return weatherServices.insert(weather);
     }
 }
