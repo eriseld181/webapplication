@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,14 +56,37 @@ public class  WeatherServices {
     public void deleteByDate(LocalDate localDate){
         weatherRepository.deleteById(localDate);
     }
-    public Object insert(Weather weather) {
-        Problem problem = new Problem();
-        problem.setProbName("Check weather details : weather ,weather temps etc");
-        if(weather !=null && weather.getIdweather()!=null){
+
+    public ResponseEntity<Object> insert(Weather weather) {
+//        Problem problem = new Problem();
+//        problem.setProbName("Check weather details : weather ,weather temps etc");
+        if (weather != null && weather.getIdweather() != null) {
             return ResponseEntity.status(HttpStatus.OK).body(weatherRepository.saveAndFlush(weather));
-        }
-       else{
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Check weaather deatils date , temps etc");
         }
+        // return weatherRepository.saveAndFlush(weather);
+
     }
+//    public static boolean isValid(final String date) {
+//
+//        boolean valid = false;
+//
+//        try {
+//
+//            // ResolverStyle.STRICT for 30, 31 days checking, and also leap year.
+//            LocalDate.parse(date,
+//                    DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//                            .withResolverStyle(ResolverStyle.STRICT)
+//            );
+//
+//            valid = true;
+//
+//        } catch (DateTimeParseException e) {
+//            e.printStackTrace();
+//            valid = false;
+//        }
+//
+//        return valid;
+//    }
 }
