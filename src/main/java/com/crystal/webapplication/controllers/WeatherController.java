@@ -71,7 +71,7 @@ public class WeatherController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Object> create(@RequestBody final Weather weather) {
+    public ResponseEntity<Weather> create(@RequestBody final Weather weather) {
         return weatherServices.insert(weather);
 
 //        try {
