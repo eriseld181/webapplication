@@ -2,6 +2,7 @@ package com.crystal.webapplication.controllers;
 
 import com.crystal.webapplication.dto.WeatherDto;
 import com.crystal.webapplication.dto.WeatherDto2;
+import com.crystal.webapplication.exceptions.MyEx;
 import com.crystal.webapplication.mappers.Ex;
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.repositories.WeatherRepository;
@@ -71,9 +72,16 @@ public class WeatherController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Weather> create(@RequestBody final Weather weather) {
-        return weatherServices.insert(weather);
+    public ResponseEntity<Object> create(@RequestBody final Weather weather) {
 
+            if(null != weatherServices.insert(weather)){
+                System.out.println("iftrue");
+            return ResponseEntity.status(HttpStatus.OK).body("U be insert");
+
+        }else{
+                System.out.println("elsse");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" not found or is deleted");
+        }
 //        try {
 //            weatherServices.insert(weather);
 //            return ResponseEntity.status(HttpStatus.OK).body("U be insert");

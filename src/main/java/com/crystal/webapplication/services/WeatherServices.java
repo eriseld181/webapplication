@@ -4,26 +4,15 @@ import com.crystal.webapplication.dto.WeatherDto;
 import com.crystal.webapplication.dto.WeatherDto2;
 import com.crystal.webapplication.exceptions.MyEx;
 import com.crystal.webapplication.mappers.WeatherMapper;
-import com.crystal.webapplication.models.Problem;
 import com.crystal.webapplication.models.Weather;
 import com.crystal.webapplication.repositories.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,18 +48,14 @@ public class  WeatherServices {
         weatherRepository.deleteById(localDate);
     }
 
-    public ResponseEntity<Weather> insert(Weather weather) {
-//        Problem problem = new Problem();
-//        problem.setProbName("Check weather details : weather ,weather temps etc");
-        try{
-            return new ResponseEntity<Weather>(weatherRepository.saveAndFlush(weather), HttpStatus.OK);
-        } catch(MyEx ex) {
-            //throw new ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Check weaather deatils date , temps etc");
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Check weather details date , temps etc");
-        }
-        // return weatherRepository.saveAndFlush(weather);
+    public Weather insert(Weather weather) {
+        Weather weather1 =  weatherRepository.saveAndFlush(weather);
+        return weather1;
 
     }
+
+
+
 //    public static boolean isValid(final String date) {
 //
 //        boolean valid = false;
